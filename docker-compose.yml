@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Your_password123
+      - MSSQL_PID=Express
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+
+  identity-api:
+    build:
+      context: .
+      dockerfile: Identity.API/Dockerfile
+    ports:
+      - "5001:80"
+    depends_on:
+      - sqlserver
+
+  users-api:
+    build:
+      context: .
+      dockerfile: Users.API/Dockerfile
+    ports:
+      - "5002:80"
+    depends_on:
+      - sqlserver
+
+  accounts-api:
+    build:
+      context: .
+      dockerfile: Accounts.API/Dockerfile
+    ports:
+      - "5003:80"
+    depends_on:
+      - sqlserver
+
+volumes:
+  sqlserver_data: 

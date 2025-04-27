@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "/Users/evanogra/.dotnet/store/|arch|/|tfm|",
+      "/Users/evanogra/.nuget/packages"
+    ]
+  }
+}
