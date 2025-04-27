@@ -12,7 +12,18 @@ namespace Identity.API.Config
                 new IdentityResources.Profile(),
                 new IdentityResources.Email()
             };
-
+        public static IEnumerable<ApiResource> ApiResources => 
+            new List<ApiResource>
+            {
+                new ApiResource("users.api", "Users API")
+                {
+                    Scopes = { "users.api" }
+                },
+                new ApiResource("accounts.api", "Accounts API")
+                {
+                    Scopes = { "accounts.api" }
+                }
+            };
         public static IEnumerable<ApiScope> ApiScopes =>
             new List<ApiScope>
             {
@@ -34,7 +45,7 @@ namespace Identity.API.Config
                     AllowedScopes = { "openid", "profile", "email", "users.api", "accounts.api" },
                     RedirectUris = { "http://localhost:4200/signin-callback" },
                     PostLogoutRedirectUris = { "http://localhost:4200/signout-callback" },
-                    AllowedCorsOrigins = { "http://localhost:4200" },
+                    AllowedCorsOrigins = { "http://localhost:4200" }
                 }
             };
     }

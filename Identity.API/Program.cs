@@ -54,6 +54,15 @@ namespace Identity.API
                     }
                     context.SaveChanges();
                 }
+                
+                if (!context.ApiResources.Any())
+                {
+                    foreach (var resource in IdentityConfig.ApiResources)
+                    {
+                        context.ApiResources.Add(resource.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
             }
 
             host.Run();
